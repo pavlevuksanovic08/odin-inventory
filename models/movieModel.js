@@ -14,7 +14,7 @@ exports.getAllMovies = async () => {
     return rows;
 }
 
-exports.getMoviesByGenre = async (id) => {
+exports.getMoviesByGenre = async (ids) => {
     const { rows } = await pool.query(`
             select m.movieID, title, d.fullName as director, array_agg(g.name) as genre
             from movie m 
@@ -26,9 +26,9 @@ exports.getMoviesByGenre = async (id) => {
                 select *
                 from movie_genre mg2
                 where mg2.movieid = m.movieid
-                and mg2.genreid = $1
+                and mg2.genreid = any($1)
             )
             group by m.movieID, d.fullname;
-        `, [id])
+        `, [ids])
     return rows;
 }
