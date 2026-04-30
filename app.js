@@ -8,10 +8,12 @@ app.set("views", "./views");
 app.use(express.urlencoded({ extended: true }));
 
 const indexRoute = require("./routes/indexRoute");
-const genreRoute = require("./routes/genreRoute")
+const genreRoute = require("./routes/genreRoute");
+const movieRoute = require("./routes/movieRoute");
 
 app.use("/", indexRoute)
 app.use("/genres", genreRoute)
+app.use("/movies", movieRoute)
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

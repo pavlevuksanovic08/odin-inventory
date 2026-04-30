@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Movies</h1>
+    <div>
+        <form method="get" action="/movies">
+            <% genres.forEach(genre => { %>
+                <label>
+                    <input type="checkbox" name="genres" value="<%= genre.genreid %>" <%= selected.includes(genre.genreid) ? 'checked' : ''%>> <%= genre.name %>
+                </label>
+            <%})%>
+            <button type="submit">Apply</button>
+        </form>
+    </div>
+    <div>
+        <% if (!movies || movies.length === 0) { %>
+            <p>There is no movie.</p>
+        <% } else { %>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Director</th>
+                <th>Genre</th>
+            </tr>
+            <% movies.forEach(movie => { %>
+                <tr>
+                    <td><%= movie.title %></td>
+                    <td><%= movie.director%></td>
+                    <td><%= movie.genre %></td>
+                </tr>
+            <%})%>
+        </table>
+        <%}%>
+    </div>
+</body>
+</html>
