@@ -7,11 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-    <select name="genre">
-        <% genres.forEach(genre => { %>
-            <option value="1"><%= genre.name %></option>
-        <%})%>
-    </select>
+    
+    <form method="get" action="/">
+        <select name="genre">
+            <option value="0">None</option>
+            <% genres.forEach(genre => { %>
+                <option value="<%= genre.genreid %>" <%= selected == genre.genreid ? 'selected' : '' %>>
+                    <%= genre.name %>
+                </option>
+            <%})%>
+        </select>
+        <button type="submit">Apply</button>
+    </form>
     <table>
         <tr>
             <th>Title</th>
