@@ -5,6 +5,7 @@ const path = require("path");
 const app = express();
 app.set("view engine", "ejs");
 app.set("views", "./views");
+app.use(express.urlencoded({ extended: true }));
 
 const indexRoute = require("./routes/indexRoute");
 const genreRoute = require("./routes/genreRoute")
