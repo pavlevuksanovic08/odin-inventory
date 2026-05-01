@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add movie</h1>
+    <form method="post" action="/movies/add">
+        <label>Title:</label>
+        <input type="text" name="title">
+        <label>Genre:</label>
+        <select name="genre">
+            <% genres.forEach(g => { %>
+                <option value="g.genreid">
+                    <%= g.name%>
+                </option>
+            <%})%>
+        </select>
+        <label>Director:</label>
+        <input type="text" name="director">
+        <button type="submit">Add</button>
+    </form>
+</body>
+</html>

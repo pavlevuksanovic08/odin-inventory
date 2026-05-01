@@ -21,3 +21,8 @@ exports.movieGet = async (req, res) => {
 
     res.render("movies", {genres, movies, selected: gIds });
 }
+
+exports.addMovieGet = async (req, res) => {
+    const genres = await genreModel.getAllGenres();
+    res.render("addMovie", { genres });
+}
