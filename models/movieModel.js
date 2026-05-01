@@ -32,3 +32,20 @@ exports.getMoviesByGenre = async (ids) => {
         `, [ids])
     return rows;
 }
+
+exports.createMovie = async (title, directorid) => {
+    const { rows } = await pool.query(`
+            insert into movie (title, directorid) 
+            values ($1, $2)
+            returning movieid
+        `, [title, directorid])
+    return rows[0].movieid;
+}
+
+exports.addToMovieGenre = async (mId, gId) => {
+    console.log(gId)
+    await pool.query(`
+            insert into movie_genre (movieid, genreid)
+            values ($1, $2)
+        `, [mId, gId])
+}
