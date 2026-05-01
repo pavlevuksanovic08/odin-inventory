@@ -11,16 +11,19 @@
         <label>Title:</label>
         <input type="text" name="title">
         <label>Genre:</label>
-        <select name="genre">
-            <% genres.forEach(g => { %>
-                <option value="g.genreid">
-                    <%= g.name%>
-                </option>
-            <%})%>
-        </select>
+        <% genres.forEach(g => { %>
+            <label>
+                <input type="checkbox" name="genres" value="<%= g.genreid %>"> <%= g.name %>
+            </label>
+        <%})%>
         <label>Director:</label>
         <input type="text" name="director">
         <button type="submit">Add</button>
     </form>
+    <% if (locals.errors) { %>
+        <% locals.errors.forEach(e => { %>
+            <p><%= e.msg %></p>
+        <%})%>
+    <%}%>
 </body>
 </html>
