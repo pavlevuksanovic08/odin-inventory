@@ -2,10 +2,9 @@ require("dotenv").config()
 const { Client } = require("pg")
 
 const SQL = `
-
     create table director (
         directorID INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-        fullName varchar(60)
+        fullName varchar(60) UNIQUE
     );
 
     create table movie (
