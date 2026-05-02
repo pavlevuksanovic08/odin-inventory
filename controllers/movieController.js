@@ -63,9 +63,7 @@ exports.postNewMovie = [
             await movieModel.addToMovieGenre(mId, Number(gId))
         }
 
-        const movies = await movieModel.getAllMovies();
-
-        res.render("movies", {movies, genres, selected: []})
+        res.redirect("/movies")
     }
 ]
 
@@ -73,4 +71,10 @@ exports.getMovie = async (req, res) => {
     const id = Number(req.params.id);
     const movie = await movieModel.getMovieById(id);
     res.render("viewMovie", { movie: movie })
+}
+
+exports.deleteMovie = async (req, res) => {
+    const mId = Number(req.params.id);
+    await movieModel.deleteMovie(mId);
+    res.redirect("/movies")
 }

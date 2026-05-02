@@ -65,3 +65,14 @@ exports.addToMovieGenre = async (mId, gId) => {
             values ($1, $2)
         `, [mId, gId])
 }
+
+exports.deleteMovie = async (mId) => {
+    await pool.query(`
+            delete from movie_genre
+            where movieid = $1;
+        `, [mId])
+    await pool.query(`
+            delete from movie
+            where movieid = $1;
+        `, [mId])
+}
