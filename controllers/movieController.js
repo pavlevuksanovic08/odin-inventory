@@ -68,3 +68,9 @@ exports.postNewMovie = [
         res.render("movies", {movies, genres, selected: []})
     }
 ]
+
+exports.getMovie = async (req, res) => {
+    const id = Number(req.params.id);
+    const movie = await movieModel.getMovieById(id);
+    res.render("viewMovie", { movie: movie })
+}
