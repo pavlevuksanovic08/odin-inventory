@@ -14,6 +14,22 @@ exports.getAllMovies = async () => {
     return rows;
 }
 
+exports.getMovieById = async (id) => {
+    const { rows } = await pool.query(`
+            select m.movieid, title, d.fullname as director, array_agg(g.name) as genre
+            from movie m
+            join director d
+            on m.directorid = d.directorid
+            join movie_genre mg
+            on m.movieid = mg.movieid
+            join genre g
+            on mg.genreid = g.genreid
+            where m.movieid = ($1)
+            group by m.movieid, d.fullname
+        `, [id])
+    return rows[0];
+}
+
 exports.getMoviesByGenre = async (ids) => {
     const { rows } = await pool.query(`
             select m.movieID, title, d.fullName as director, array_agg(g.name) as genre
