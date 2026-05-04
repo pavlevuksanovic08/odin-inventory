@@ -78,3 +78,41 @@ exports.deleteMovie = async (req, res) => {
     await movieModel.deleteMovie(mId);
     res.redirect("/movies")
 }
+
+exports.getEditMovie = async (req, res) => {
+    const mId = Number(req.params.id);
+    const movie = await movieModel.getMovieById(mId);
+    const genres = await genreModel.getAllGenres();
+    res.render("addMovie", { movie, genres })
+}
+
+exports.postEditMovie = [
+    validateAddMovie,
+    async (req, res) => {
+
+        const mId = Number(req.params.id);
+
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            const movie = await movieModel.getMovieById(mId);
+            const genres = await genreModel.getAllGenres();
+
+            res.render("addMovie", {genres, movie, errors: errors.array(), old: req.body});
+        }
+
+
+        let genres = req.body.genres;
+
+        if (!Array.isArray(genres)) {
+            genres = [genres];
+        }
+
+        genres = genres.map(Number);
+
+        req.body.genres = genres;
+
+        await movieModel.updateMovie(mId, req.body);
+
+        res.redirect(`/movies/${mId}`)
+    }
+]
