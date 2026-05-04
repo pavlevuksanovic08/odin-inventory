@@ -6,19 +6,19 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Add movie</h1>
-    <form method="post" action="/movies/add">
+    <h1><%= locals.movie ? 'Edit movie' : 'Add movie' %></h1>
+    <form method="post" action="<%= locals.movie ? `/movies/${movie.movieid}/edit` : '/movies/add' %>">
         <label>Title:</label>
-        <input type="text" name="title">
+        <input type="text" name="title" value="<%= locals.movie ? movie.title : '' %>">
         <label>Genre:</label>
         <% genres.forEach(g => { %>
             <label>
-                <input type="checkbox" name="genres" value="<%= g.genreid %>"> <%= g.name %>
+                <input type="checkbox" name="genres" value="<%= g.genreid %>" <%= locals.movie ? movie.genre.includes(g.name) ? 'checked' : '' : '' %>> <%= g.name %>
             </label>
         <%})%>
         <label>Director:</label>
-        <input type="text" name="director">
-        <button type="submit">Add</button>
+        <input type="text" name="director" value="<%= locals.movie ? movie.director : ''%>">
+        <button type="submit"><%= locals.movie ? 'Edit' : 'Add' %></button>
     </form>
     <% if (locals.errors) { %>
         <% locals.errors.forEach(e => { %>
