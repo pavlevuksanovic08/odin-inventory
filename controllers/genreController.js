@@ -67,3 +67,11 @@ exports.postGenreEdit = [
         res.redirect("/genres");
     }
 ]
+
+exports.postDeleteGenre = async (req, res) => {
+    const gId = req.params.id;
+
+    await genreModel.deleteGenre(gId);
+
+    res.redirect('/genres')
+}

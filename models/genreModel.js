@@ -40,3 +40,35 @@ exports.editGenre = async (id, newName) => {
             where genreid = $2;
         `, [newName, id]);
 }
+
+exports.deleteGenre = async (id) => {
+
+    const client = await pool.connect()
+
+    try {
+        await client.query("BEGIN")
+
+        await client.query(`
+            delete from genre
+            where genreid = $1
+        `, [id])
+
+        await client.query(`
+                delete from movie m
+                where not exists (
+                    select 1
+                    from movie_genre mg
+                    where mg.movieid = m.movieid
+                );
+            `);
+
+
+        await client.query("COMMIT")
+    } catch (err) {
+        await client.query("ROLLBACK");
+        throw err;
+    } finally {
+        client.release();
+    }
+    
+}
