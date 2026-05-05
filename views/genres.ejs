@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/genre.css">
     <title>Document</title>
 </head>
 <body>
@@ -15,8 +16,16 @@
     <div>
         <% genres.forEach(genre => { %>
             <a>
-                <div>
+                <div class="genreDiv">
                     <p><%= genre.name %></p>
+                    <div class="btns">
+                        <a href="genres/<%= genre.genreid %>/edit">
+                            <img src="/images/edit.png">
+                        </a>
+                        <a>
+                            <img src="/images/bin.png">
+                        </a>
+                    </div>
                 </div>
             </a>
         <%})%>
