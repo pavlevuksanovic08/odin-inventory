@@ -23,3 +23,20 @@ exports.validateGenreDuplication = async (value) => {
             `, [value])
     return rows;
 }
+
+exports.getGenreById = async (id) => {
+    const { rows } = await pool.query(`
+            select *
+            from genre
+            where genreid = $1;
+        `, [id])
+    return rows[0];
+}
+
+exports.editGenre = async (id, newName) => {
+    await pool.query(`
+            update genre
+            set name = $1
+            where genreid = $2;
+        `, [newName, id]);
+}

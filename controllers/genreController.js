@@ -44,3 +44,26 @@ exports.postGenreAdd = [
         res.render("genres", {genres: genres})
     }
 ]
+
+exports.getEdit = async (req, res) => {
+    const gId = Number(req.params.id);
+    const genre = await genreModel.getGenreById(gId);
+    res.render("addGenre", { genre })
+}
+
+exports.postGenreEdit = [
+    insertGenreValidator,
+    async (req, res) => {
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.render("addGenre", {errors: errors.array()})
+        }
+
+        const gId = req.params.id;
+        const newName = req.body.name;
+
+        await genreModel.editGenre(gId, newName);
+        res.redirect("/genres");
+    }
+]
