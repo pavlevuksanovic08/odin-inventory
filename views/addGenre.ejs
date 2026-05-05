@@ -6,10 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Add Genre</h1>
-    <form method="post" action="/genres/add">
-        <input type="text" name="name">
-        <button type="submit">Add</button>
+    <h1><%= locals.genre ? 'Edit genre' : 'Add Genre'%></h1>
+    <form method="post" action="<%= locals.genre ? `/genres/${genre.genreid}/edit` : '/genres/add'%>">
+        <input type="text" name="name" value="<%= locals.genre ? genre.name : ''%>">
+        <button type="submit"><%= locals.genre ? 'Edit' : 'Add' %></button>
     </form>
     <% if (locals.errors) { %>
         <% locals.errors.forEach(err => { %>
