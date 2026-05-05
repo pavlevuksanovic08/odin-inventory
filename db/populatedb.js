@@ -24,7 +24,7 @@ const SQL = `
         genreID INTEGER,
         PRIMARY KEY (movieID, genreID),
         FOREIGN KEY (movieID) REFERENCES movie(movieID),
-        FOREIGN KEY (genreID) REFERENCES genre(genreID)
+        FOREIGN KEY (genreID) REFERENCES genre(genreID) ON DELETE CASCADE
     );
 
 insert into director (fullName) values 
