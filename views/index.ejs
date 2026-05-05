@@ -8,32 +8,10 @@
 </head>
 <body>
     
-    <form method="get" action="/">
-        <select name="genre">
-            <option value="0">None</option>
-            <% genres.forEach(genre => { %>
-                <option value="<%= genre.genreid %>" <%= selected == genre.genreid ? 'selected' : '' %>>
-                    <%= genre.name %>
-                </option>
-            <%})%>
-        </select>
-        <button type="submit">Apply</button>
-    </form>
+    <h1>Movie app</h1>
+
     <a href="/genres"><button>Genres</button></a>
     <a href="/movies"><button>Movies</button></a>
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Director</th>
-            <th>Genre</th>
-        </tr>
-        <% movies.forEach(movie => { %>
-            <tr>
-                <td><%= movie.title %></td>
-                <td><%= movie.director%></td>
-                <td><%= movie.genre %></td>
-            </tr>
-        <%})%>
-    </table>
+    
 </body>
 </html>
