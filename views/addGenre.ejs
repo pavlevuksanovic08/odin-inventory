@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="<%= locals.genre ? `/genres/${genre.genreid}` : '/genres' %>">
+        <button>Go back</button>
+    </a>
     <h1><%= locals.genre ? 'Edit genre' : 'Add Genre'%></h1>
     <form method="post" action="<%= locals.genre ? `/genres/${genre.genreid}/edit` : '/genres/add'%>">
         <input type="text" name="name" value="<%= locals.genre ? genre.name : ''%>">

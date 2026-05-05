@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="<%= locals.movie ? `/movies/${movie.movieid}` : '/movies' %>">
+        <button>Go back</button>
+    </a>
     <h1><%= locals.movie ? 'Edit movie' : 'Add movie' %></h1>
     <form method="post" action="<%= locals.movie ? `/movies/${movie.movieid}/edit` : '/movies/add' %>">
         <label>Title:</label>
