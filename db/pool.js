@@ -1,10 +1,14 @@
-const { Pool } = require("pg");
+const { Pool } = require('pg');
 
+// Determine which URL to use based on NODE_ENV
+const connectionString = process.env.NODE_ENV === 'production' 
+    ? process.env.PRODUCTION_URL 
+    : process.env.DEVELOPMENT_URL;
 
-module.exports = new Pool({
-    host: "localhost",
-    user: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-    port: process.env.DB_PORT
-})
+const pool = new Pool({
+    connectionString: connectionString,
+    // Render requires SSL for production, but local usually doesn't
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+});
+
+module.exports = pool;
