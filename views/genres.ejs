@@ -24,9 +24,12 @@
                         <a href="genres/<%= genre.genreid %>/edit">
                             <img src="/images/edit.png">
                         </a>
-                        <a>
-                            <img src="/images/bin.png">
-                        </a>
+                        <form method="post" action="/genres/<%= genre.genreid %>/delete" 
+                            onsubmit="return confirm('If you delete this genre you are also going to delete all movies with this genre. Do you still want to delete it?')">
+                            <button type="submit" style="background:none; border:none; padding:0;">
+                                <img src="/images/bin.png" alt="delete">
+                            </button>
+                        </form>
                     </div>
                 </div>
             </a>
