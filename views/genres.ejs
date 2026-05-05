@@ -17,7 +17,9 @@
         <% genres.forEach(genre => { %>
             <a>
                 <div class="genreDiv">
-                    <p><%= genre.name %></p>
+                    <a href="/movies?genres=<%= genre.genreid %>">
+                        <p><%= genre.name %></p>                       
+                    </a>
                     <div class="btns">
                         <a href="genres/<%= genre.genreid %>/edit">
                             <img src="/images/edit.png">
